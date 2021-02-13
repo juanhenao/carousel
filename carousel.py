@@ -16,6 +16,7 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 img_names = ["2in13", "2in13_2"]
+
 def load_image(img):
     logging.info("Printing image " + img + '.bmp')
     image = Image.open(os.path.join(imagesDir, img + '.bmp'))
@@ -24,26 +25,15 @@ def load_image(img):
 
 
 try:
-    logging.info("epd2in13_V2 Demo")
+    logging.info("Image Carousel")
     
     epd = epd2in13_V2.EPD()
-    logging.info("init and Clear")
+    logging.info("Init and Clear")
     epd.init(epd.FULL_UPDATE)
     epd.Clear(0xFF)
 
-        
     while True:
         [load_image(img) for img in img_names]
-    
-    
-    logging.info("Clear...")
-    epd.init(epd.FULL_UPDATE)
-    epd.Clear(0xFF)
-    
-    logging.info("Goto Sleep...")
-    epd.sleep()
-    time.sleep(3)
-    epd.Dev_exit()
         
 except IOError as e:
     logging.info(e)
